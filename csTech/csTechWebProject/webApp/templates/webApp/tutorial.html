@@ -1,0 +1,28 @@
+{% extends "webApp/header.html" %}
+
+{%  block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="well">All Tutorial Contents</h1>
+            <br>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Contents</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tut in tutorials %}
+                        <tr>
+                            <td>{{tut.tutorial_title}}</td>
+                            <td>{{tut.tutorial_content | safe}}</td>
+                            <td>{{tut.tutorial_published}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
