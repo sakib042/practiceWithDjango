@@ -1,0 +1,22 @@
+{% extends "webApp/header.html" %}
+
+{%  block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="well">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <br>
+                    <p class="text-right">
+                        <button type="submit" class="btn btn-success">Register</button>
+                    </p>
+                </form>
+                 <hr>
+                if you already have an account, <a href="login">login</a> here!
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -3,28 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>CS Tech</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
 
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">CS Tech</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="/">Home</a></li>
-          <li><a href="/tutorial">Tutorial</a></li>
-          <li><a href="/about">About Us</a></li>
-        </ul>
-      </div>
-    </nav>
+    {% include "webApp/include/navbar.html" %}
+
+    {% include "webApp/include/messages.html" %}
 
     <div class="container">
         {%  block content %}
@@ -33,7 +26,7 @@
 
     <div class="container-fluid">
         <hr>
-        <p class="text-center">CS Tech&nbsp;&copy; - 2019</p>
+        <p class="center-align">CS Tech&nbsp;&copy; - 2019</p>
     </div>
 
 </body>

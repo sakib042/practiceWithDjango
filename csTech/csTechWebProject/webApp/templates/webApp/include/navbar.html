@@ -1,0 +1,17 @@
+<nav>
+    <div class="nav-wrapper blue">
+        <a href="/" class="brand-logo">CS Tech</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li class="active"><a href="/">Home</a></li>
+<!--                <li><a href="/tutorial">Tutorial</a></li>-->
+            <li><a href="/about">About Us</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="profile"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;{{user.username}}</a></li>
+                <li><a href="logout">Logout&nbsp;&nbsp;<span class="glyphicon glyphicon-log-out"></span></a></li>
+            {% else %}
+                <li><a href="login"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</a></li>
+                <li><a href="registration"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Register</a></li>
+            {% endif %}
+        </ul>
+    </div>
+  </nav>

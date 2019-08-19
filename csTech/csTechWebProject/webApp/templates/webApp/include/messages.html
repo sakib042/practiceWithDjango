@@ -1,0 +1,13 @@
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <script>M.toast({html: "{{message}}", classes: 'rounded red', displayLength: '5000'});</script>
+        {% elif message.tags == 'info' %}
+            <script>M.toast({html: "{{message}}", classes: 'rounded light-blue accent-1', displayLength: '5000'});</script>
+        {% elif message.tags == 'success' %}
+            <script>M.toast({html: "{{message}}", classes: 'rounded green accent-4', displayLength: '5000'});</script>
+        {% elif message.tags == 'warning' %}
+            <script>M.toast({html: "{{message}}", classes: 'rounded orange lighten-2', displayLength: '5000'});</script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
