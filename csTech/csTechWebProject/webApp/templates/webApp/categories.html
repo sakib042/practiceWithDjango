@@ -1,0 +1,21 @@
+{% extends "webApp/header.html" %}
+
+{%  block content %}
+    <div class="row">
+        <br>
+        <h5>Tutorial List by Category</h5>
+        <hr>
+        {% for cat in categories %}
+            <div class="col s12 m4">
+                <a href="{{cat.category_slug}}">
+                    <div class="card hoverable">
+                        <div class="card-content">
+                            <span class="card-title">{{cat.category_name}}</span>
+                            {{cat.category_summary}}
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

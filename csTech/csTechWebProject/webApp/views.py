@@ -1,15 +1,38 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Tutorial
+from .models import Tutorial, TutorialCategory, TutorialSeries
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import NewUserForm
 
 
+def single_slug(request, single_slug):
+    requested_page_location = 'webApp/category.html'
+    categories = [c.category_slug for c in TutorialCategory.objects.all()]
+    if single_slug in categories:
+        matching_series = TutorialSeries.objects.filter(category_name__category_slug=single_slug)
+
+        series_urls = {}
+        for m in matching_series.all():
+            part_one = Tutorial.objects.filter(tutorial_series_name__tutorial_series_name=m.tutorial_series_name).earliest("tutorial_published")
+            series_urls[m] = part_one.tutorial_slug
+
+        return render(request, requested_page_location, {"part_ones": series_urls})
+
+    tutorials = [t.tutorial_slug for t in Tutorial.objects.all()]
+    if single_slug in tutorials:
+        this_tutorial = Tutorial.objects.get(tutorial_slug=single_slug)
+        tutorial_from_series = Tutorial.objects.filter(tutorial_series_name__tutorial_series_name=this_tutorial.tutorial_series_name).order_by("tutorial_published")
+        this_tutorial_idx = list(tutorial_from_series).index(this_tutorial)
+        return render(request, "webApp/tutorial.html", {"tutorial": this_tutorial, "sidebar": tutorial_from_series, "this_tutorial_idx": this_tutorial_idx})
+
+    return HttpResponse("does not have any")
+
+
 def home(request):
-    requested_page_location = 'webApp/home.html'
-    return render(request, requested_page_location)
+    requested_page_location = 'webApp/categories.html'
+    return render(request, requested_page_location, context={'categories': TutorialCategory.objects.all})
 
 
 def about(request):
@@ -51,7 +74,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"{username} has been logged In!")
-                return redirect("webApp:tutorial")
+                return redirect("webApp:home")
             else:
                 messages.error(request, "Invalid Username or Password")
         else:
@@ -64,5 +87,5 @@ def login_request(request):
 
 def logout_request(request):
     logout(request)
-    messages.info(request, "Logged out Successfully!")
-    return redirect("webApp:home")
+    messages.success(request, "Logged out Successfully!")
+    return redirect("webApp:login")

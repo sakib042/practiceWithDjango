@@ -10,4 +10,5 @@ urlpatterns = [
     path('tutorial', views.tutorial, name='tutorial'),
     path('login', views.login_request, name='login'),
     path('logout', views.logout_request, name='logout'),
+    path("<single_slug>", views.single_slug, name="Single_Slug"),
 ]
